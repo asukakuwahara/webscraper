@@ -9,21 +9,21 @@ This webscraper performs the following tasks:
 5. Fetches/extracts data from the table into array.
 6. Exports the array as a CSV file.
 
-##Getting Started
-1. Fork or clone the repo by
+## Getting Started
+1. Clone the repository
 
 ```
 git clone git@github.com:asucarlos/webscraper.git
 ```
 
-2. CD into server folder and install dependencies.
+2. CD into server folder and install dependencies
 
 ```
 cd webscraper
 npm i
 ```
 
-3. Execute the file from terminal
+3. Execute the file from terminal  <br />
 *Delete the output.csv before executing to see the new file created 
 
 ```
