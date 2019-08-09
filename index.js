@@ -1,7 +1,9 @@
-const Nightmare = require("nightmare")
+const Nightmare = require("nightmare");
 const nightmare = Nightmare({ show: true })
 const fs = require("fs")
 const { Parser } = require("json2csv");
+const { Promise } = require("bluebird");
+Promise.promisifyAll(fs) 
 
 //list of inputs
 const google = "https://www.google.com/"
@@ -22,6 +24,7 @@ nightmare
   .type(searchBar, inputContent)
   .click(searchButton)
   .wait(resultElements)
+
   //finds the link that matches to the correct URL and clicks
   .evaluate((resultElements, correctURL) => {
     const searchResult = Array.from(document.querySelectorAll(resultElements)).filter(a => a.href === correctURL)
@@ -31,12 +34,14 @@ nightmare
   .select(lengthSelector, length) //show all entries on screen
   .wait(data)
   .evaluate((header, data)=>{
-    let table = [];
-    let fields = [];
-    //store all header to the fields array
+    const table = [];
+    const fields = [];
+
+    //store all headers to the fields array
     $(header).each((index, value) => {
       fields.push(value.innerHTML)
     })
+
     //store all data to the table array
     $(data).each((index, value) => {
       const item = {}
@@ -45,20 +50,23 @@ nightmare
       })
       table.push(item)
     })
-    //store them in an object
+
+    //store headers and data in an object
     const outputData = {table, fields}
     return outputData
   }, header, data)
   .end()
   .then((result) => {
-    //parse arrays to csv
+
+    //parse header and data arrays to csv
     const fields = result.fields
     const json2csvParser = new Parser({ fields });
     const csv = json2csvParser.parse(result.table);
-    //produce a csv file and save in the same folder
+
+    //produce a csv file and save it in root folder
     fs.writeFileSync("output.csv", csv, (err)=>{
       if(err) throw err;
-      console.log("done!")
+      console.log("done!");
     })
   })
   .catch(error => {

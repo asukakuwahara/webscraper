@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/asucarlos/webscraper#readme",
   "dependencies": {
+    "bluebird": "^3.5.5",
     "jquery": "^3.4.1",
     "json2csv": "^4.5.2",
     "nightmare": "^3.0.2"
