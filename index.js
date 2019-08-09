@@ -17,7 +17,6 @@ const data = "table#example tbody tr"
 const lengthSelector = "select[name='example_length']"
 const length = 100;
 
-
 nightmare
   //opens google, type "datatables" and search
   .goto(google)
