@@ -16,7 +16,7 @@ This webscraper performs the following tasks:
 git clone git@github.com:asucarlos/webscraper.git
 ```
 
-2. CD into server folder and install dependencies
+2. CD into the folder and install dependencies
 
 ```
 cd webscraper
@@ -30,10 +30,26 @@ npm i
 node index.js
 ```
 
-4. Check the created output.csv file to see the result
+4. Check the created output.csv file to see the result <br />
+*If you cannot find the output.csv, 
+try installing xvfb for virtual server display as follows.
+
+- Install dependencies for xvfb
+```
+sudo apt-get update &&\
+  sudo apt-get install -y libgtk2.0-0 libgconf-2-4 \
+  libasound2 libxtst6 libxss1 libnss3 xvfb
+```
+
+- Run code with xvfb
+```
+xvfb-run node index.js
+```
+
+Source: 
+https://github.com/segmentio/nightmare/issues/224#issuecomment-141575361
 
 ## Dependencies
   - nightmare
   - jQuery
   - json2csv
-  - bluebird
