@@ -2,8 +2,6 @@ const Nightmare = require("nightmare");
 const nightmare = Nightmare({ show: true })
 const fs = require("fs")
 const { Parser } = require("json2csv");
-const { Promise } = require("bluebird");
-Promise.promisifyAll(fs) 
 
 //list of inputs
 const google = "https://www.google.com/"
