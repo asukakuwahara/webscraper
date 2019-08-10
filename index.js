@@ -1,17 +1,18 @@
 const Nightmare = require("nightmare");
-const nightmare = Nightmare({ show: true })
 const fs = require("fs")
 const { Parser } = require("json2csv");
+
+const nightmare = Nightmare({ show: true })
 
 //list of inputs
 const google = "https://www.google.com/"
 const inputContent = "datatables"
 const searchBar = ".gLFyf"
 const searchButton = ".gNO89b"
-const resultElements = ".r > a"
+const resultElem = ".r > a"
 const correctURL = "https://datatables.net/"
-const header = "table#example thead th"
-const data = "table#example tbody tr"
+const headerElem = "table#example thead th"
+const dataElem = "table#example tbody tr"
 const lengthSelector = "select[name='example_length']"
 const length = 100;
 
@@ -20,27 +21,27 @@ nightmare
   .goto(google)
   .type(searchBar, inputContent)
   .click(searchButton)
-  .wait(resultElements)
+  .wait(resultElem)
 
   //finds the link that matches to the correct URL and clicks
-  .evaluate((resultElements, correctURL) => {
-    const searchResult = Array.from(document.querySelectorAll(resultElements)).filter(a => a.href === correctURL)
+  .evaluate((resultElem, correctURL) => {
+    const searchResult = Array.from(document.querySelectorAll(resultElem)).filter(a => a.href === correctURL)
     searchResult[0].click()
-  }, resultElements, correctURL) //passes parameters from Node scope to browser scope
-  .wait(data)
+  }, resultElem, correctURL) //passes parameters from Node scope to browser scope
+  .wait(dataElem)
   .select(lengthSelector, length) //show all entries on screen
-  .wait(data)
-  .evaluate((header, data)=>{
+  .wait(dataElem)
+  .evaluate((headerElem, dataElem)=>{
     const table = [];
     const fields = [];
 
     //store all headers to the fields array
-    $(header).each((index, value) => {
+    $(headerElem).each((index, value) => {
       fields.push(value.innerHTML)
     })
 
     //store all data to the table array
-    $(data).each((index, value) => {
+    $(dataElem).each((index, value) => {
       const item = {}
       $(value).children().each((index, value) => {
         item[fields[index]] = value.innerHTML;
@@ -51,7 +52,7 @@ nightmare
     //store headers and data in an object
     const outputData = {table, fields}
     return outputData
-  }, header, data)
+  }, headerElem, dataElem) //passes parameters from Node scope to browser scope
   .end()
   .then((result) => {
 
