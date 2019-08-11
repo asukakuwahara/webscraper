@@ -17,20 +17,23 @@ const lengthSelector = "select[name='example_length']"
 const length = 100;
 
 nightmare
-  //opens google, type "datatables" and search
+  //open google, type "datatables" and search
   .goto(google)
   .type(searchBar, inputContent)
   .click(searchButton)
   .wait(resultElem)
 
-  //finds the link that matches to the correct URL and clicks
+  //find the link that matches to the correct URL and clicks
   .evaluate((resultElem, correctURL) => {
     const searchResult = Array.from(document.querySelectorAll(resultElem)).filter(a => a.href === correctURL)
     searchResult[0].click()
-  }, resultElem, correctURL) //passes parameters from Node scope to browser scope
+  }, resultElem, correctURL) //pass parameters from Node scope to browser scope
   .wait(dataElem)
-  .select(lengthSelector, length) //show all entries on screen
+
+  //select 100 to show all entries on screen
+  .select(lengthSelector, length) 
   .wait(dataElem)
+
   .evaluate((headerElem, dataElem)=>{
     const table = [];
     const fields = [];

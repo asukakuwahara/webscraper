@@ -31,9 +31,9 @@ node index.js
 ```
 
 4. Check the created output.csv file to see the result <br />
-*If you cannot find the output.csv, 
+   <br />
+*If output.csv cannot be found, 
 try installing xvfb for virtual server display as follows.
-
 - Install dependencies for xvfb
 ```
 sudo apt-get update &&\
@@ -46,7 +46,7 @@ sudo apt-get update &&\
 xvfb-run node index.js
 ```
 
-Source: 
+Source: <br />
 https://github.com/segmentio/nightmare/issues/224#issuecomment-141575361
 
 ## Dependencies
