@@ -32,19 +32,19 @@ node index.js
 
 4. Check the created output.csv file to see the result <br />
    <br />
-*If output.csv cannot be found, 
-try installing xvfb for virtual server display as follows.
-- Install dependencies for xvfb
-```
-sudo apt-get update &&\
-  sudo apt-get install -y libgtk2.0-0 libgconf-2-4 \
-  libasound2 libxtst6 libxss1 libnss3 xvfb
-```
+  *If output.csv cannot be found, 
+  try installing xvfb for virtual display server as follows.
+  - Install dependencies for xvfb
+  ```
+  sudo apt-get update &&\
+    sudo apt-get install -y libgtk2.0-0 libgconf-2-4 \
+    libasound2 libxtst6 libxss1 libnss3 xvfb
+  ```
 
-- Run code with xvfb
-```
-xvfb-run node index.js
-```
+  - Run code with xvfb
+  ```
+  xvfb-run node index.js
+  ```
 
 Source: <br />
 https://github.com/segmentio/nightmare/issues/224#issuecomment-141575361
